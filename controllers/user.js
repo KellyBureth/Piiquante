@@ -44,7 +44,7 @@ exports.userLogin = (req, res, next) => {
             token: jwt.sign(
               //fonction de jsonwebtoken pour le token
               { userId: user._id }, //user à encoder
-              "RANDOM_TOKEN_SECRET", //clé secrete pour l'encodage
+              "0XSsGAT4srFHmRv5ntrCqQDfw3yxAj", //clé secrete pour l'encodage
               { expiresIn: "24h" } //session expire en 24h
             ),
           });
