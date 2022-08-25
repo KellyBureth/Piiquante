@@ -1,5 +1,6 @@
 const http = require("http");
 const app = require("./app");
+const dotenv = require("dotenv").config();
 
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
@@ -12,7 +13,7 @@ const normalizePort = (val) => {
   }
   return false;
 };
-const port = normalizePort("3000"); //const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT); //const port = normalizePort(process.env.PORT || '3000');
 app.set("port", port);
 
 const errorHandler = (error) => {
@@ -46,10 +47,3 @@ server.on("listening", () => {
 });
 
 server.listen(port);
-
-/*const http = require("http");
-const app = require("./app");
-app.set("port", 3000);
-const server = http.createServer(app);
-
-server.listen(3000); //server.listen(process.env.PORT || 3000);*/
