@@ -5,10 +5,17 @@ const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauce");
 const path = require("path");
 const dotenv = require("dotenv").config();
+const helmet = require("helmet");
 
 mongoose
   .connect(
-    `mongodb+srv://${process.env.MDB_USERNAME}:${process.env.MDB_PASSWORD}@${process.env.MDB_CLUSTER}.mongodb.net/?retryWrites=true&w=majorityè`,
+    "mongodb+srv://" +
+      process.env.MDB_USERNAME +
+      ":" +
+      process.env.MDB_PASSWORD +
+      "@" +
+      process.env.MDB_CLUSTER +
+      ".mongodb.net/?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
@@ -32,5 +39,5 @@ app.use((req, res, next) => {
 app.use("/api/auth", userRoutes); //importe les routes en definissant l'url de base
 app.use("/api/sauces", sauceRoutes); //importe les routes en definissant l'url de base
 app.use("/images", express.static(path.join(__dirname, "images")));
-
+app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } })); //argument pour afficher image
 module.exports = app; // exporte l'application pour y acceder depuis les autres fichiers

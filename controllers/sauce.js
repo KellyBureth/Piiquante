@@ -1,6 +1,5 @@
-const Sauce = require("../models/sauce"); 
+const Sauce = require("../models/sauce");
 const fs = require("fs");
-
 
 //------CREER UNE SAUCE------
 exports.createSauce = (req, res, next) => {
@@ -20,8 +19,6 @@ exports.createSauce = (req, res, next) => {
     .then(() => res.status(201).json({ message: "Sauce enregistrée !" }))
     .catch((error) => res.status(400).json({ error }));
 };
-
-
 
 //------MODIFIER UNE SAUCE------
 exports.updateSauce = (req, res, next) => {
@@ -53,7 +50,6 @@ exports.updateSauce = (req, res, next) => {
     });
 };
 
-
 //------SUPPRIMER UNE SAUCE ------
 exports.deleteSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
@@ -76,8 +72,6 @@ exports.deleteSauce = (req, res, next) => {
     });
 };
 
-
-
 //------VOIR TOUTES LES SAUCES------
 exports.readAllSauces = (req, res, next) => {
   Sauce.find()
@@ -85,10 +79,9 @@ exports.readAllSauces = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-
 //------VOIR UNE SAUCE EN DETAIL------
 exports.readOneSauce = (req, res, next) => {
-  Sauce.findOne({ _id: req.params.id }) 
+  Sauce.findOne({ _id: req.params.id })
     .then((sauce) => res.status(200).json(sauce))
     .catch((error) => res.status(404).json({ error })); //404 objet non trouvé
 };
